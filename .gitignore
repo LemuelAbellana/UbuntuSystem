@@ -1,0 +1,22 @@
+# Environment configuration
+.env
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Vendor directories (if using Composer later)
+/vendor/
+
+# Old PHP files (from previous iteration)
+config.php
+index.php
+add.php
+edit.php
+delete.php
+database.sql
+README.md

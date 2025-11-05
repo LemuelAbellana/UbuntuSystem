@@ -6,7 +6,8 @@
       "Bash(php -r:*)",
       "Bash(php migrate.php:*)",
       "Bash(findstr:*)",
-      "Bash(php test_connection.php:*)"
+      "Bash(php test_connection.php:*)",
+      "Bash(php verify_env.php:*)"
     ],
     "deny": [],
     "ask": []
