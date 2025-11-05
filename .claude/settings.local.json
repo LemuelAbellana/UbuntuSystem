@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(composer --version:*)",
+      "Bash(where:*)",
+      "Bash(php -r:*)",
+      "Bash(php migrate.php:*)",
+      "Bash(findstr:*)",
+      "Bash(php test_connection.php:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
