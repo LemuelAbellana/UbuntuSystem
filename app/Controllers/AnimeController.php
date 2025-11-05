@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Models\Anime;
+
 require_once __DIR__ . '/../Models/Anime.php';
 
 class AnimeController {
