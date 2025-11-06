@@ -3,8 +3,12 @@
 namespace App\Controllers;
 
 use App\Models\Anime;
+use App\Security\CSRF;
+use App\Validators\AnimeValidator;
 
 require_once __DIR__ . '/../Models/Anime.php';
+require_once __DIR__ . '/../Security/CSRF.php';
+require_once __DIR__ . '/../Validators/AnimeValidator.php';
 
 class AnimeController {
     private $model;
@@ -28,6 +32,12 @@ class AnimeController {
     // Store newly created anime
     public function store() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Validate CSRF token
+            session_start();
+            if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
+                die('CSRF token validation failed');
+            }
+
             $data = [
                 'title' => $_POST['title'],
                 'genre' => $_POST['genre'],
@@ -35,6 +45,12 @@ class AnimeController {
                 'status' => $_POST['status'],
                 'rating' => $_POST['rating']
             ];
+
+            // Validate input
+            $errors = AnimeValidator::validate($data);
+            if (!empty($errors)) {
+                die('Validation failed: ' . implode(', ', $errors));
+            }
 
             if ($this->model->create($data)) {
                 header('Location: /anime?message=Anime created successfully');
@@ -56,6 +72,12 @@ class AnimeController {
     // Update anime
     public function update($id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Validate CSRF token
+            session_start();
+            if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
+                die('CSRF token validation failed');
+            }
+
             $data = [
                 'title' => $_POST['title'],
                 'genre' => $_POST['genre'],
@@ -63,6 +85,12 @@ class AnimeController {
                 'status' => $_POST['status'],
                 'rating' => $_POST['rating']
             ];
+
+            // Validate input
+            $errors = AnimeValidator::validate($data);
+            if (!empty($errors)) {
+                die('Validation failed: ' . implode(', ', $errors));
+            }
 
             if ($this->model->update($id, $data)) {
                 header('Location: /anime?message=Anime updated successfully');
@@ -73,6 +101,12 @@ class AnimeController {
 
     // Delete anime
     public function destroy($id) {
+        // Validate CSRF token
+        session_start();
+        if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
+            die('CSRF token validation failed');
+        }
+
         if ($this->model->delete($id)) {
             header('Location: /anime?message=Anime deleted successfully');
         } else {

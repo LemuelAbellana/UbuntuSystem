@@ -94,9 +94,41 @@
             border-color: #3498db;
         }
         .actions { margin-top: 20px; }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+        }
+        .header h2 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
+    <?php if (isset($_SESSION['user_id'])): ?>
+    <div class="header" style="max-width: 1200px; margin: 0 auto 20px; background: white; padding: 15px 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h2>Anime Management System</h2>
+        <div>
+            <span style="margin-right: 15px; color: #555;">Welcome, <?php echo htmlspecialchars($_SESSION['username'] ?? 'User'); ?></span>
+            <a href="/logout" class="btn btn-secondary btn-sm">Logout</a>
+        </div>
+    </div>
+    <?php endif; ?>
     <div class="container">
         <?php echo $content; ?>
     </div>

